@@ -13,6 +13,10 @@ module.exports = defineConfig({
       '/ueditor': {
         target: 'http://localhost:3000', // 目标服务器地址
         changeOrigin: true, // 是否跨域
+      },
+      '/xiumi-ue-dialog-v5': {
+        target: 'http://localhost:3000', // 目标服务器地址
+        changeOrigin: true, // 是否跨域
       }
     }
   }

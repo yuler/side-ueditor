@@ -19,18 +19,35 @@ export default {
       })
     }
 
+    const loadLink = (href) => {
+      return new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = href
+        link.onload = resolve
+        link.onerror = reject
+        document.head.appendChild(link)
+      })
+    }
+    
+
     try {
       // await loadScript('/libs/ueditor/ueditor.config.js')
       // await loadScript('/libs/ueditor/ueditor.all.min.js')
       // await loadScript('/libs/ueditor/lang/zh-cn/zh-cn.js')
-
+      
       await loadScript('http://localhost:8080/php-server/ueditor.config.js')
       await loadScript('http://localhost:8080/php-server/ueditor.all.min.js')
-      await loadScript('http://localhost:8080/php-server/lang/zh-cn/zh-cn.js')
+
+      await Promise.all([
+        loadScript('http://localhost:8080/php-server/lang/zh-cn/zh-cn.js'),
+        loadScript('http://localhost:8080/php-server/xiumi-ue-dialog-v5.js'),
+        loadLink('http://localhost:8080/php-server/xiumi-ue-v5.css')
+      ])
       
       this.initializeEditor()
     } catch (error) {
-      console.error('Failed to load UEditor scripts:', error)
+      console.error('Failed to load UEditor resources:', error)
     }
   },
 
