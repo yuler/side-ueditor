@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <UEditor />
+    <UEditor class="ueditor" />
   </div>
 </template>
 
@@ -22,6 +22,12 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+  margin: 0 auto;
+  width: 1000px;
   margin-top: 60px;
+}
+
+.ueditor {
+  width: 1000px;
 }
 </style>
