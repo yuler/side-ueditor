@@ -1,4 +1,4 @@
-# side-ue-editor
+# side-ueditor
 
 This repo is explore ueditor integration with Vue 2.x project.
 
