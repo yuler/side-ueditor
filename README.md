@@ -6,8 +6,8 @@ This repo is explore ueditor integration with Vue 2.x project.
 
 ```bash
 pnpm install
-pnpm run php:server
-pnpm run dev
+pnpm run php:server # Start PHP server first
+pnpm run dev # Start Vue project
 ```
 
 ## Links
