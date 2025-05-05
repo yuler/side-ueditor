@@ -2,12 +2,12 @@
 
 This repo is explore ueditor integration with Vue 2.x project.
 
-## PHP Server
+## Quick Start
 
 ```bash
-cd php-server
-php -S localhost:3000
-# ./start-server.sh
+pnpm install
+pnpm run php:server
+pnpm run dev
 ```
 
 ## Links
@@ -17,6 +17,13 @@ php -S localhost:3000
 
 - UEditor 文档
 - <https://fex-team.github.io/ueditor>
+
+## PHP Server
+
+```bash
+cd php-server
+php -S localhost:3000
+```
 
 <!--
 ## server
