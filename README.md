@@ -15,7 +15,9 @@ pnpm run dev # Start Vue project
 - [x] DEMO 目前支持图片视频上传
 - [x] DEMO 目前支持表情选择
 - [x] 集成 秀米 按钮
-- [ ] <https://ent.xiumi.us/ue/> 秀米这个 DEMO 中图片和视频无法上传
+- [ ] 支持 OSS 直传
+- [ ] 支持 word 文档复制，图片的时候动态上传
+- [ ] 秀米点击到处，直接写入到 ueditor 的内容
 
 - 这个部署的时候需要 PHP Server 配合，目前 DEMO 是通过启动 PHP Server 来实现的。
 - 目前前端项目是通过 dev server 做的 proxy, 由于 ueditor, 用大量使用了 iframe 和 jsonp, 需要部署到同源减少不必要的错误。线上环境需要使用 nginx 反向代理，或者其他相关的服务。
