@@ -29,13 +29,13 @@ export default {
         document.head.appendChild(link)
       })
     }
-    
+
 
     try {
       // await loadScript('/libs/ueditor/ueditor.config.js')
       // await loadScript('/libs/ueditor/ueditor.all.min.js')
       // await loadScript('/libs/ueditor/lang/zh-cn/zh-cn.js')
-      
+
       await loadScript('http://localhost:8080/php-server/ueditor.config.js')
       await loadScript('http://localhost:8080/php-server/ueditor.all.min.js')
 
@@ -44,7 +44,7 @@ export default {
         loadScript('http://localhost:8080/php-server/xiumi-ue-dialog-v5.js'),
         loadLink('http://localhost:8080/php-server/xiumi-ue-v5.css')
       ])
-      
+
       this.initializeEditor()
     } catch (error) {
       console.error('Failed to load UEditor resources:', error)
@@ -67,6 +67,18 @@ export default {
         console.log('Content changed:', editor.getContent())
       })
       window.editor = editor
+
+      // Interupter file upload
+      // eslint-disable-next-line no-unused-vars
+      // editor.addListener('beforeInsertImage', (editor, imgUrls, url, opt) => {
+      //   console.log('即将插入图片：', imgUrls);
+      // })
+      // editor.addListener('beforeUpload', (editor, files, type) => {
+      //   console.log('即将上传的文件类型：', type, '文件列表：', files);
+      // })
+      // editor.addListener('beforePaste', (editor, pasteData) => {
+      //   console.log('即将粘贴的内容：', pasteData);
+      // })
     }
   }
 }

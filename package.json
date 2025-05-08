@@ -2,11 +2,11 @@
   "name": "side-ue-editor",
   "version": "0.1.0",
   "private": true,
-
   "packageManager": "pnpm@9.15.0+sha512.76e2379760a4328ec4415815bcd6628dee727af3779aaa4c914e3944156c4299921a89f976381ee107d41f12cfa4b66681ca9c718f0668fa0831ed4c6d8ba56c",
   "scripts": {
-    "dev": "vue-cli-service serve",
-    "php:server": "cd php-server && php -S localhost:3000",
+    "dev": "npm-run-all --parallel dev:server dev:client",
+    "dev:client": "vue-cli-service serve",
+    "dev:server": "cd php-server && php -S localhost:3000",
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint"
@@ -23,6 +23,7 @@
     "@vue/cli-service": "~5.0.0",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
+    "npm-run-all": "^4.1.5",
     "vue-template-compiler": "^2.6.14"
   },
   "eslintConfig": {

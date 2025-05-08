@@ -24,11 +24,10 @@ pnpm run dev # Start Vue project
 
 ## Links
 
-- 秀米编辑器 demo
-- <https://ent.xiumi.us/ue/>
+- [秀米编辑器](https://ent.xiumi.us/ueditor/index.html)
+- [ueditor docs](https://fex-team.github.io/ueditor)
+- [ueditor-plus](https://github.com/modstart-lib/ueditor-plus)
 
-- UEditor 文档
-- <https://fex-team.github.io/ueditor>
 
 ## PHP Server
 
