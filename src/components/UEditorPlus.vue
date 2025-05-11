@@ -248,14 +248,8 @@ export default {
               refreshSTSTokenInterval: ossConf.DurationSeconds,
               bucket: ossConf.BucketName,
             })
-            // the file is WUFile object
-            const rawFile = file?.blob || file;
-            // console.log(typeof rawFile)
-            // console.log({ rawFile })
-            // console.log('instanceof File', rawFile instanceof window.File)
-            // console.log('instanceof Blob', rawFile instanceof window.Blob)
-            // console.log({client})
-
+            const rawFile = file?.blob?.source || file;
+      
             const result = await client.multipartUpload(rawFile.name, rawFile, {
               progress: (p) => {
                 console.log('process =>', p)
@@ -288,8 +282,8 @@ export default {
   created() {
     let script = document.createElement('script');
             script.type = 'text/javascript';
-            script.src = '/libs/aliyun-oss-sdk-6.16.0.min.js';
-            document.body.appendChild(script) 
+            script.src = 'https://gosspublic.alicdn.com/aliyun-oss-sdk-6.16.0.min.js';
+            document.body.appendChild(script)
   }
 }
 </script>
