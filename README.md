@@ -15,7 +15,7 @@ pnpm run dev # Start Vue project
 - [x] DEMO 目前支持图片视频上传
 - [x] DEMO 目前支持表情选择
 - [x] 集成 秀米 按钮
-- [ ] 支持 OSS 直传
+- [x] 支持 OSS 直传
 - [ ] 支持 word 文档复制，图片的时候动态上传
 - [ ] 秀米点击到处，直接写入到 ueditor 的内容
 
@@ -27,7 +27,6 @@ pnpm run dev # Start Vue project
 - [秀米编辑器](https://ent.xiumi.us/ueditor/index.html)
 - [ueditor docs](https://fex-team.github.io/ueditor)
 - [ueditor-plus](https://github.com/modstart-lib/ueditor-plus)
-
 
 ## PHP Server
 
