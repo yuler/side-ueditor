@@ -31,8 +31,8 @@ pnpm run dev # Start Vue project
 ## PHP Server
 
 ```bash
-cd php-server
-php -S localhost:3000
+pnpm install
+pnpm run dev
 ```
 
 <!--
