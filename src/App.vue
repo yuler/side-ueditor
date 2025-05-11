@@ -1,16 +1,16 @@
 <template>
   <div id="app">
-    <UEditor class="ueditor" />
+    <UEditorPlus class="ueditor" />
   </div>
 </template>
 
 <script>
-import UEditor from './components/UEditor.vue'
+import UEditorPlus from './components/UEditorPlus.vue'
 
 export default {
   name: 'App',
   components: {
-    UEditor
+    UEditorPlus
   }
 }
 </script>
