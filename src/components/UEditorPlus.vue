@@ -11,7 +11,22 @@
 </template>
 <script>
 import VueUeditorWrap from 'vue-ueditor-wrap'
-import AliOSS from 'ali-oss'
+
+function getBuffer(file) {
+  // Some browsers do not support Blob.prototype.arrayBuffer, such as IE
+  if (file.arrayBuffer) return file.arrayBuffer();
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = function (e) {
+      resolve(e.target.result);
+    };
+    reader.onerror = function (e) {
+      reject(e);
+    };
+    reader.readAsArrayBuffer(file);
+  });
+}
+
 
 export default {
   components: {
@@ -31,9 +46,9 @@ export default {
             "fullscreen",   // 全屏
             "source",       // 源代码
             "|",
-            "undo",         // 撤销
-            "redo",         // 重做
-            "|",
+            // "undo",         // 撤销
+            // "redo",         // 重做
+            // "|",
             "bold",         // 加粗
             "italic",       // 斜体
             "underline",    // 下划线
@@ -58,32 +73,32 @@ export default {
             "rowspacingbottom",    // 段后距
             "lineheight",          // 行间距
             "|",
-            "customstyle",         // 自定义标题
+            // "customstyle",         // 自定义标题
             "paragraph",           // 段落格式
             "fontfamily",          // 字体
             "fontsize",            // 字号
-            "|",
-            "directionalityltr",   // 从左向右输入
-            "directionalityrtl",   // 从右向左输入
-            "indent",              // 首行缩进
+            // "|",
+            // "directionalityltr",   // 从左向右输入
+            // "directionalityrtl",   // 从右向左输入
+            // "indent",              // 首行缩进
             "|",
             "justifyleft",         // 居左对齐
             "justifycenter",       // 居中对齐
             "justifyright",
             "justifyjustify",      // 两端对齐
             "|",
-            "touppercase",         // 字母大写
-            "tolowercase",         // 字母小写
-            "|",
-            "link",                // 超链接
-            "unlink",              // 取消链接
-            "anchor",              // 锚点
-            "|",
-            "imagenone",           // 图片默认
-            "imageleft",           // 图片左浮动
-            "imageright",          // 图片右浮动
-            "imagecenter",         // 图片居中
-            "|",
+            // "touppercase",         // 字母大写
+            // "tolowercase",         // 字母小写
+            // "|",
+            // "link",                // 超链接
+            // "unlink",              // 取消链接
+            // "anchor",              // 锚点
+            // "|",
+            // "imagenone",           // 图片默认
+            // "imageleft",           // 图片左浮动
+            // "imageright",          // 图片右浮动
+            // "imagecenter",         // 图片居中
+            // "|",
             "simpleupload",        // 单图上传
             // "insertimage",         // 多图上传
             "emotion",             // 表情
@@ -104,18 +119,18 @@ export default {
             "wordimage",           // Word图片转存
             "|",
             "inserttable",         // 插入表格
-            "deletetable",         // 删除表格
-            "insertparagraphbeforetable",     // 表格前插入行
-            "insertrow",           // 前插入行
-            "deleterow",           // 删除行
-            "insertcol",           // 前插入列
-            "deletecol",           // 删除列
-            "mergecells",          // 合并多个单元格
-            "mergeright",          // 右合并单元格
-            "mergedown",           // 下合并单元格
-            "splittocells",        // 完全拆分单元格
-            "splittorows",         // 拆分成行
-            "splittocols",         // 拆分成列
+            // "deletetable",         // 删除表格
+            // "insertparagraphbeforetable",     // 表格前插入行
+            // "insertrow",           // 前插入行
+            // "deleterow",           // 删除行
+            // "insertcol",           // 前插入列
+            // "deletecol",           // 删除列
+            // "mergecells",          // 合并多个单元格
+            // "mergeright",          // 右合并单元格
+            // "mergedown",           // 下合并单元格
+            // "splittocells",        // 完全拆分单元格
+            // "splittorows",         // 拆分成行
+            // "splittocols",         // 拆分成列
             "contentimport",       // 内容导入（支持Word、Markdown）
             "|",
             // "ai",                  // AI智能
@@ -219,11 +234,13 @@ export default {
         // refs: https://open-doc.modstart.com/ueditor-plus/manual.html#uploadserviceupload
         uploadServiceEnable: true,
         uploadServiceUpload: async function(type, file, callback) {
+          console.log({ file })
+          console.log('uploadServiceUpload', type, file, callback)
           try {
             const res = await fetch('https://www.qiqucn.com/oss/get_sts?reset=1')
             const data = await res.json()
             const ossConf = data.result
-            const client = new AliOSS({
+            const client = new window.OSS({
               region: ossConf.RegionId,
               accessKeyId: ossConf.AccessKeyId,
               accessKeySecret: ossConf.AccessKeySecret,
@@ -231,9 +248,17 @@ export default {
               refreshSTSTokenInterval: ossConf.DurationSeconds,
               bucket: ossConf.BucketName,
             })
-            const result = await client.multipartUpload(file.name, file, {
+            // the file is WUFile object
+            const rawFile = file?.blob || file;
+            // console.log(typeof rawFile)
+            // console.log({ rawFile })
+            // console.log('instanceof File', rawFile instanceof window.File)
+            // console.log('instanceof Blob', rawFile instanceof window.Blob)
+            // console.log({client})
+
+            const result = await client.multipartUpload(rawFile.name, rawFile, {
               progress: (p) => {
-                console.log(p)
+                console.log('process =>', p)
                 callback.progress(p)
               },
             })
@@ -244,7 +269,7 @@ export default {
 
             if (!url) {
               console.warn({result})
-              callback.error('上传失败')
+              callback.error(`http|500|上传失败`)
               return
             }
 
@@ -253,12 +278,18 @@ export default {
               url,
             })
           } catch (error) {
-            console.log(error)
-            callback.error(error)
+            console.error(error)
+            callback.error(`http|500|${error}`)
           }
         },
       },
     }
   },
+  created() {
+    let script = document.createElement('script');
+            script.type = 'text/javascript';
+            script.src = '/libs/aliyun-oss-sdk-6.16.0.min.js';
+            document.body.appendChild(script) 
+  }
 }
 </script>
