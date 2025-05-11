@@ -1,32 +1,13 @@
 <template>
-  <div>
-    <vue-ueditor-wrap
-      v-model="content"
-      editor-id="editor"
-      :config="editorConfig"
-      :editorDependencies="['ueditor.config.js', 'ueditor.all.js']"
-      style="height: 500px"
-    />
-  </div>
+  <vue-ueditor-wrap
+    v-model="content"
+    editor-id="editor"
+    :config="editorConfig"
+    :editorDependencies="['ueditor.config.js', 'ueditor.all.js']"
+  />
 </template>
 <script>
 import VueUeditorWrap from 'vue-ueditor-wrap'
-
-function getBuffer(file) {
-  // Some browsers do not support Blob.prototype.arrayBuffer, such as IE
-  if (file.arrayBuffer) return file.arrayBuffer();
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
-    reader.onload = function (e) {
-      resolve(e.target.result);
-    };
-    reader.onerror = function (e) {
-      reject(e);
-    };
-    reader.readAsArrayBuffer(file);
-  });
-}
-
 
 export default {
   components: {
@@ -259,7 +240,7 @@ export default {
 
             console.log({result})
 
-            const url = result?.res?.requestUrls[0] || ''
+            const url = (result?.res?.requestUrls[0] || '').split('?')[0]
 
             if (!url) {
               console.warn({result})
@@ -280,10 +261,12 @@ export default {
     }
   },
   created() {
+    // Note: this sdk url is change `isFile` function for hack
+    // Because the webuploader wrap a WUFile object is not a File object
     let script = document.createElement('script');
-            script.type = 'text/javascript';
-            script.src = 'https://gosspublic.alicdn.com/aliyun-oss-sdk-6.16.0.min.js';
-            document.body.appendChild(script)
+    script.type = 'text/javascript';
+    script.src = '/libs/aliyun-oss-sdk-6.16.0.min.js';
+    document.body.appendChild(script) 
   }
 }
 </script>
