@@ -6,8 +6,7 @@ This repo is explore ueditor integration with Vue 2.x project.
 
 ```bash
 pnpm install
-pnpm run php:server # Start PHP server first
-pnpm run dev # Start Vue project
+pnpm run dev
 ```
 
 ## TODO List
@@ -27,13 +26,6 @@ pnpm run dev # Start Vue project
 - [秀米编辑器](https://ent.xiumi.us/ueditor/index.html)
 - [ueditor docs](https://fex-team.github.io/ueditor)
 - [ueditor-plus](https://github.com/modstart-lib/ueditor-plus)
-
-## PHP Server
-
-```bash
-pnpm install
-pnpm run dev
-```
 
 <!--
 ## server
