@@ -2,6 +2,7 @@
   <div id="app">
     <UEditorPlus class="ueditor" v-model="content" />
 
+    <h1>preivew</h1>
     <div v-html="content"></div>
   </div>
 </template>
@@ -24,11 +25,11 @@ export default {
 
 <style>
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
+  /* font-family: Avenir, Helvetica, Arial, sans-serif; */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
+  /* text-align: center; */
+  /* color: #2c3e50; */
   margin: 0 auto;
   width: 1000px;
   margin-top: 60px;

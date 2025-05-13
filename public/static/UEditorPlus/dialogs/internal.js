@@ -69,7 +69,7 @@
                             p != "options" && dom.setAttribute(p, content[p]);
                         }
                         break;
-                    default :
+                    default:
                         domUtils.setAttributes(dom, content);
                 }
             }

@@ -1,4 +1,19 @@
-.edui-button.edui-for-xiumi-connect .edui-button-wrap .edui-button-body .edui-icon {
+/* icon */
+.edui-button.edui-for-xiumi-connect .edui-icon:before {
+  content: "";
+  display: block;
   background-image: url("./xiumi-connect-icon.png") !important;
   background-size: contain;
+  width: 16px !important;
+  height: 16px !important;
+  margin: 7px;
+}
+
+.edui-dialog.edui-for-xiumi-connect.edui-default {
+  width: 95vw !important;
+  height: 95vh !important;
+}
+
+.edui-dialog.edui-for-xiumi-connect.edui-default .edui-dialog-body.edui-default {
+  height: 100% !important;
 }

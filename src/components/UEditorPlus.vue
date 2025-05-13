@@ -7,7 +7,14 @@
 <script lang="js">
 export default {
   name: 'UEditor',
+  props: {
+    value: {
+      type: String,
+      default: '',
+    },
+  },
   async mounted() {
+    console.log(this.value)
     // Load UEditor script
     try {
       // load oss sdk
@@ -33,8 +40,9 @@ export default {
   },
 
   methods: {
-    initializeEditor() {
+    async initializeEditor() {
       const editor = window.UE.getEditor('editor', {
+        initialContent: this.value,
         // refs: https://open-doc.modstart.com/ueditor-plus/manual.html
         UEDITOR_HOME_URL: '/static/UEditorPlus/',
         UEDITOR_CORS_URL: '/static/UEditorPlus/',
@@ -81,6 +89,8 @@ export default {
             "time",                // 时间
             "|",
             "inserttable",         // 插入表格
+            "|",
+            "xiumi-connect",       // 秀米
           ]
         ],
         // 快捷菜单
@@ -99,13 +109,13 @@ export default {
         toolbarShow: {
           "ai": false,
         },
-
         imageConfig: {
           disableOnline: true,
         },
         videoConfig: {
           disableOnline: true,
         },
+        catchRemoteImageEnable: true,
         // 底部左下腳元素提示
         elementPathEnabled: false,
         autoHeightEnabled: true,
@@ -128,7 +138,9 @@ export default {
           console.log({ file })
           console.log('uploadServiceUpload', type, file, callback)
           try {
-            const res = await fetch('https://www.qiqucn.com/oss/get_sts?reset=1')
+            // TODO: 
+            // const res = await fetch(`https://www.qiqucn.com/custom/oss/get_sts?reset=1&type=${type}`)
+            const res = await fetch(`https://www.qiqucn.com/oss/get_sts?reset=1&type=${type}`)
             const data = await res.json()
             const ossConf = data.result
             const client = new window.OSS({
@@ -173,6 +185,7 @@ export default {
       })
       editor.addListener('contentChange', () => {
         console.log('Content changed:', editor.getContent())
+        this.$emit('input', editor.getContent())
       })
       window.editor = editor
     }
