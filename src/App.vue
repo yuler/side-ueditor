@@ -1,6 +1,8 @@
 <template>
   <div id="app">
-    <UEditorPlus class="ueditor" />
+    <UEditorPlus class="ueditor" v-model="content" />
+
+    <div v-html="content"></div>
   </div>
 </template>
 
@@ -11,6 +13,11 @@ export default {
   name: 'App',
   components: {
     UEditorPlus
+  },
+  data() {
+    return {
+      content: '<p>Hi UEditorPlus</p>',
+    }
   }
 }
 </script>
@@ -27,7 +34,7 @@ export default {
   margin-top: 60px;
 }
 
-.ueditor {
-  width: 1000px;
+body {
+  margin: 0;
 }
 </style>

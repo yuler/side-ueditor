@@ -1,40 +1,32 @@
 <template>
-  <div class="width:100%;">
-    <script id="editor" type="text/plain" style="height:100px;"></script>
-  </div>
+  <vue-ueditor-wrap
+    v-model="content" :config="editorConfig" editor-id="editor"
+    :editorDependencies="['ueditor.config.js', 'ueditor.all.js']"
+    @ready="onReady"
+  />
 </template>
 
-<script lang="js">
+<script>
+import VueUeditorWrap from 'vue-ueditor-wrap'
+
 export default {
-  name: 'UEditor',
-  async mounted() {
-    // Load UEditor script
-    try {
-      // load oss sdk
-      loadScript('/libs/aliyun-oss-sdk-6.16.0.min.js')
-        .then(() => {
-          console.log('oss sdk loaded')
-        })
-
-      // Note: These scripts must be loaded in sequence
-      await loadScript('/static/UEditorPlus/ueditor.config.js')
-      await loadScript('/static/UEditorPlus/ueditor.all.js')
-
-      await Promise.all([
-        loadScript('/static/UEditorPlus/lang/zh-cn/zh-cn.js'),
-        loadScript('/static/UEditorPlus/xiumi-ue-dialog-v5.js'),
-        loadLink('/static/UEditorPlus/xiumi-ue-v5.css')
-      ])
-
-      this.initializeEditor()
-    } catch (error) {
-      console.error('Failed to load UEditor resources:', error)
-    }
+  components: {
+    VueUeditorWrap,
   },
-
-  methods: {
-    initializeEditor() {
-      const editor = window.UE.getEditor('editor', {
+  props: {
+    height: {
+      type: Number,
+      default: 300,
+    },
+    value: {
+      type: String,
+      default: '<p>Hello UEditorPlus</p>',
+    },
+  },
+  data() {
+    return {
+      content: this.value,
+      editorConfig: {
         // refs: https://open-doc.modstart.com/ueditor-plus/manual.html
         UEDITOR_HOME_URL: '/static/UEditorPlus/',
         UEDITOR_CORS_URL: '/static/UEditorPlus/',
@@ -79,6 +71,7 @@ export default {
             "horizontal",          // 分隔线
             "date",                // 日期
             "time",                // 时间
+
             "|",
             "inserttable",         // 插入表格
           ]
@@ -108,8 +101,6 @@ export default {
         },
         // 底部左下腳元素提示
         elementPathEnabled: false,
-        autoHeightEnabled: true,
-        initialFrameHeight: 100,
 
         // 自动保存
         autoSaveEnable: true,
@@ -167,42 +158,24 @@ export default {
             callback.error(`http|500|${error}`)
           }
         },
-      })
-      editor.ready(() => {
-        console.log('Editor is ready')
-      })
-      editor.addListener('contentChange', () => {
-        console.log('Content changed:', editor.getContent())
-      })
-      window.editor = editor
+      },
     }
-  }
-}
-
-const loadScript = (src) => {
-  return new Promise((resolve, reject) => {
-    const script = document.createElement('script')
-    script.src = src
-    script.onload = resolve
-    script.onerror = reject
+  },
+  created() {
+    // Note: this sdk url is change `isFile` function for hack
+    // Because the webuploader wrap a WUFile object is not a File object
+    let script = document.createElement('script');
+    script.type = 'text/javascript';
+    script.src = '/libs/aliyun-oss-sdk-6.16.0.min.js';
     document.body.appendChild(script)
-  })
-}
-
-const loadLink = (href) => {
-  return new Promise((resolve, reject) => {
-    const link = document.createElement('link')
-    link.rel = 'stylesheet'
-    link.href = href
-    link.onload = resolve
-    link.onerror = reject
-    document.head.appendChild(link)
-  })
+  },
+  methods: {
+    onReady(editor) {
+      console.log('editor', editor)
+      window.editor = editor
+      // editor.setHeight(200)
+      // editor.
+    },
+  },
 }
 </script>
-
-<style>
-.edui-toolbar {
-  text-align: left!important;
-}
-</style>

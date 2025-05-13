@@ -76,12 +76,12 @@ $config = [
     'fileManagerAllowFiles' => ['.zip', '.pdf', '.doc'],
 
     // 工具栏和快捷菜单配置
-    'toolbarShows' => [
-        'ai' => true,
-    ],
-    'shortcutMenuShows' => [
-        'ai' => true,
-    ],
+    // 'toolbarShows' => [
+    //     'ai' => true,
+    // ],
+    // 'shortcutMenuShows' => [
+    //     'ai' => true,
+    // ],
 ];
 
 /**

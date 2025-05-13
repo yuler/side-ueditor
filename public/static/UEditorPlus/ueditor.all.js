@@ -34381,7 +34381,6 @@ UE.ui = baidu.editor.ui = {};
             return isSubMenuShow;
         },
         show: function (e, hasContextmenu) {
-            return
             var me = this,
                 offset = {},
                 el = this.getDom(),
