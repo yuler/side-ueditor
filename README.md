@@ -30,7 +30,6 @@ pnpm run dev
 ## Edit Plus Changes
 
 - [ ] 禁用悬浮 AI 按钮, <https://github.com/yuler/side-ueditor/commit/d1987587716f1b76416f4bd18b6cf8ff76933722>
-- [ ]
 
 ## Links
 
