@@ -23,7 +23,7 @@ pnpm run dev
 - [x] 直传 oss 携带 type
 - [x] 去掉底部提示文案
 - [ ] word 复制图片
-- [ ] 底部加一个预览的 html div
+- [x] 底部加一个预览的 html div
 - [x] 添加秀米按钮, 打开秀米弹窗, 到处直接将内容写回编辑器
 
 ## Links
