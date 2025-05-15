@@ -105,107 +105,107 @@ function output(array $data): void
 $action = $_GET['action'] ?? '';
 
 switch ($action) {
-    case 'showPost':
-        output($_POST);
-        break;
+    // case 'showPost':
+    //     output($_POST);
+    //     break;
 
-    case 'image':
-        // 图片文件上传
-        sleep(1);
-        $name = $_POST['name'] ?? '';
-        output([
-            'state' => 'SUCCESS',
-            'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg?name=' . urlencode($name),
-        ]);
-        break;
+    // case 'image':
+    //     // 图片文件上传
+    //     sleep(1);
+    //     $name = $_POST['name'] ?? '';
+    //     output([
+    //         'state' => 'SUCCESS',
+    //         'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg?name=' . urlencode($name),
+    //     ]);
+    //     break;
 
-    case 'listImage':
-        // 图片列表
-        $list = [];
-        for ($i = 0; $i < 20; $i++) {
-            $list[] = [
-                'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg',
-                'mtime' => time(),
-            ];
-        }
-        $result = [
-            'state' => 'SUCCESS',
-            'list' => $list,
-            'start' => (int)($_GET['start'] ?? 0),
-            'total' => 100
-        ];
-        output($result);
-        break;
+    // case 'listImage':
+    //     // 图片列表
+    //     $list = [];
+    //     for ($i = 0; $i < 20; $i++) {
+    //         $list[] = [
+    //             'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg',
+    //             'mtime' => time(),
+    //         ];
+    //     }
+    //     $result = [
+    //         'state' => 'SUCCESS',
+    //         'list' => $list,
+    //         'start' => (int)($_GET['start'] ?? 0),
+    //         'total' => 100
+    //     ];
+    //     output($result);
+    //     break;
 
-    case 'video':
-        // 上传视频
-        output([
-            'state' => 'SUCCESS',
-            'url' => 'https://ms-assets.modstart.com/demo/modstart.mp4'
-        ]);
-        break;
+    // case 'video':
+    //     // 上传视频
+    //     output([
+    //         'state' => 'SUCCESS',
+    //         'url' => 'https://ms-assets.modstart.com/demo/modstart.mp4'
+    //     ]);
+    //     break;
 
-    case 'audio':
-        // 上传音频
-        output([
-            'state' => 'SUCCESS',
-            'url' => 'https://ms-assets.modstart.com/demo/music.mp3'
-        ]);
-        break;
+    // case 'audio':
+    //     // 上传音频
+    //     output([
+    //         'state' => 'SUCCESS',
+    //         'url' => 'https://ms-assets.modstart.com/demo/music.mp3'
+    //     ]);
+    //     break;
 
-    case 'file':
-        // 上传文件
-        output([
-            'state' => 'SUCCESS',
-            'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg'
-        ]);
-        break;
+    // case 'file':
+    //     // 上传文件
+    //     output([
+    //         'state' => 'SUCCESS',
+    //         'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg'
+    //     ]);
+    //     break;
 
-    case 'listFile':
-        // 文件列表
-        $list = [];
-        for ($i = 0; $i < 20; $i++) {
-            $list[] = [
-                'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg',
-                'mtime' => time(),
-            ];
-        }
-        $result = [
-            'state' => 'SUCCESS',
-            'list' => $list,
-            'start' => (int)($_GET['start'] ?? 0),
-            'total' => 100
-        ];
-        output($result);
-        break;
+    // case 'listFile':
+    //     // 文件列表
+    //     $list = [];
+    //     for ($i = 0; $i < 20; $i++) {
+    //         $list[] = [
+    //             'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg',
+    //             'mtime' => time(),
+    //         ];
+    //     }
+    //     $result = [
+    //         'state' => 'SUCCESS',
+    //         'list' => $list,
+    //         'start' => (int)($_GET['start'] ?? 0),
+    //         'total' => 100
+    //     ];
+    //     output($result);
+    //     break;
 
-    case 'crawl':
-        // 涂鸦上传
-        output([
-            'state' => 'SUCCESS',
-            'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg'
-        ]);
-        break;
+    // case 'crawl':
+    //     // 涂鸦上传
+    //     output([
+    //         'state' => 'SUCCESS',
+    //         'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg'
+    //     ]);
+    //     break;
 
-    case 'catch':
-        // 图片抓取
-        $list = [];
-        $source = $_POST['source'] ?? [];
-        if (!is_array($source) || empty($source)) {
-            $source = [];
-        }
-        foreach ($source as $imgUrl) {
-            $list[] = [
-                'state' => 'SUCCESS',
-                'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg',
-                'size' => 100,
-                'title' => 'title',
-                'original' => '',
-                'source' => htmlspecialchars($imgUrl),
-            ];
-        }
-        output(['state' => 'SUCCESS', 'list' => $list]);
-        break;
+    // case 'catch':
+    //     // 图片抓取
+    //     $list = [];
+    //     $source = $_POST['source'] ?? [];
+    //     if (!is_array($source) || empty($source)) {
+    //         $source = [];
+    //     }
+    //     foreach ($source as $imgUrl) {
+    //         $list[] = [
+    //             'state' => 'SUCCESS',
+    //             'url' => 'https://ms-assets.modstart.com/demo/modstart.jpg',
+    //             'size' => 100,
+    //             'title' => 'title',
+    //             'original' => '',
+    //             'source' => htmlspecialchars($imgUrl),
+    //         ];
+    //     }
+    //     output(['state' => 'SUCCESS', 'list' => $list]);
+    //     break;
 
     default:
         output($config);
